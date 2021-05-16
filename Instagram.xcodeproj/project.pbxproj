@@ -21,6 +21,9 @@
 		C672FECA264E2199001A4A07 /* TabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C672FEC9264E2199001A4A07 /* TabBarController.swift */; };
 		C697913B264E5CBF0004D11E /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = C697913A264E5CBF0004D11E /* GoogleService-Info.plist */; };
 		C6BDEF642650F316003739EF /* Const.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6BDEF632650F316003739EF /* Const.swift */; };
+		C6BDEF6726510CF7003739EF /* PostData.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6BDEF6626510CF7003739EF /* PostData.swift */; };
+		C6BDEF6B265110E4003739EF /* PostTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6BDEF69265110E4003739EF /* PostTableViewCell.swift */; };
+		C6BDEF6C265110E4003739EF /* PostTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = C6BDEF6A265110E4003739EF /* PostTableViewCell.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -41,6 +44,9 @@
 		C672FEC9264E2199001A4A07 /* TabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarController.swift; sourceTree = "<group>"; };
 		C697913A264E5CBF0004D11E /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		C6BDEF632650F316003739EF /* Const.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Const.swift; sourceTree = "<group>"; };
+		C6BDEF6626510CF7003739EF /* PostData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostData.swift; sourceTree = "<group>"; };
+		C6BDEF69265110E4003739EF /* PostTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostTableViewCell.swift; sourceTree = "<group>"; };
+		C6BDEF6A265110E4003739EF /* PostTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PostTableViewCell.xib; sourceTree = "<group>"; };
 		D29AC7EC1E66575087E3DAC6 /* Pods-Instagram.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Instagram.debug.xcconfig"; path = "Target Support Files/Pods-Instagram/Pods-Instagram.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -108,6 +114,9 @@
 				C672FEC9264E2199001A4A07 /* TabBarController.swift */,
 				C697913A264E5CBF0004D11E /* GoogleService-Info.plist */,
 				C6BDEF632650F316003739EF /* Const.swift */,
+				C6BDEF6626510CF7003739EF /* PostData.swift */,
+				C6BDEF69265110E4003739EF /* PostTableViewCell.swift */,
+				C6BDEF6A265110E4003739EF /* PostTableViewCell.xib */,
 			);
 			path = Instagram;
 			sourceTree = "<group>";
@@ -172,6 +181,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				C672FEB0264E1B67001A4A07 /* LaunchScreen.storyboard in Resources */,
+				C6BDEF6C265110E4003739EF /* PostTableViewCell.xib in Resources */,
 				C697913B264E5CBF0004D11E /* GoogleService-Info.plist in Resources */,
 				C672FEAD264E1B67001A4A07 /* Assets.xcassets in Resources */,
 				C672FEAB264E1B66001A4A07 /* Main.storyboard in Resources */,
@@ -227,11 +237,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C6BDEF6B265110E4003739EF /* PostTableViewCell.swift in Sources */,
 				C672FEC0264E1BF9001A4A07 /* ImageSelectViewController.swift in Sources */,
 				C672FECA264E2199001A4A07 /* TabBarController.swift in Sources */,
 				C672FEBD264E1BE4001A4A07 /* HomeViewController.swift in Sources */,
 				C672FEC3264E1C0D001A4A07 /* PostViewController.swift in Sources */,
 				C672FEBA264E1BC9001A4A07 /* LoginViewController.swift in Sources */,
+				C6BDEF6726510CF7003739EF /* PostData.swift in Sources */,
 				C672FEC6264E1C22001A4A07 /* SettingViewCiontroller.swift in Sources */,
 				C672FEA4264E1B66001A4A07 /* AppDelegate.swift in Sources */,
 				C672FEA6264E1B66001A4A07 /* SceneDelegate.swift in Sources */,
