@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import Firebase
 
 class TabBarController: UITabBarController, UITabBarControllerDelegate {
     
@@ -35,6 +36,19 @@ class TabBarController: UITabBarController, UITabBarControllerDelegate {
             //タブ切替で表示する
             return true
         }
+    }
+    
+    //ログインの判断を実装
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+
+        //currentUserがnil -> ログインしていない場合
+        if Auth.auth().currentUser == nil {
+            //LoginViewControllerインスタンスを作成し、Modal viewで表示
+            let loginViewController = self.storyboard?.instantiateViewController(withIdentifier: "Login")
+            self.present(loginViewController!, animated: true, completion: nil)
+        }
+        
     }
     
     
