@@ -37,7 +37,7 @@
                             <constraint firstAttribute="height" constant="40" id="VmA-xQ-mKS"/>
                             <constraint firstAttribute="width" constant="40" id="tSN-Fw-TmF"/>
                         </constraints>
-                        <state key="normal" title="Button" backgroundImage="like_none"/>
+                        <state key="normal" title="Button" image="like_none"/>
                     </button>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HMD-Jt-mBC">
                         <rect key="frame" x="130" y="360.5" width="200" height="21"/>

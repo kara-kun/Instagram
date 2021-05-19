@@ -26,6 +26,7 @@ class TabBarController: UITabBarController, UITabBarControllerDelegate {
     //＊＊＊＊第2引数viewController:UIViewControllerに、タップされたボタンに応じたviewControllerインスタンスが入る＊＊＊＊
     func tabBarController(_ tabBarController: UITabBarController, shouldSelect viewController: UIViewController) -> Bool {
         //「投稿」ボタンが押された -> ImageSelectViewControllerが呼ばれた際は、
+        //**(isはTypeチェック 「インスタンス名　is Type名」)
         if viewController is ImageSelectViewController {
             //「ImageSelect」IDが付与されたストーリーボートに対応するImageSelectViewControllerのインスタンス、imageSelectViewControllerを作成
             let imageSelectViewController = storyboard!.instantiateViewController(withIdentifier: "ImageSelect")

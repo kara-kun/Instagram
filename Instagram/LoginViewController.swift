@@ -16,7 +16,7 @@ class LoginViewController: UIViewController {
     
     //ログインボタンを押された時に呼ばれるメソッド
     @IBAction func handleLoginButton(_ sender: Any) {
-        //オプショナルバインディング：メアドとパスワードの両方がnilでないことを確認(nilならそもそも何もしない)
+        //オプショナルバインディング：メアドとパスワードの入力が両方がnilでないことを確認(nilならそもそも何もしない)
         if let address = mailAddressTextField.text , let password = passwordTextField.text {
             //メアド、パスワードいずれかの入力が空文字の場合-> HUDで警告メッセージ(withStatus:String)を表示し、returnもどる
             if address.isEmpty || password.isEmpty {
