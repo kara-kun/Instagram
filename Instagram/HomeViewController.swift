@@ -27,7 +27,7 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
         
         //----カスタムセルPostTableViewCellを登録する-----
         //nibオブジェクトを作成："PostTableViewCell.xib"ファイルをキャッシュに読込。
-        //ちなみにnib：NextstepInterfaceBuilder xib：XML Interface Builderらしい？？XcodeのXじゃないのね？
+        //ちなみにnib：NextstepInterfaceBuilder xib：XML Interface Builderらしい？？
         let nib = UINib(nibName: "PostTableViewCell", bundle: nil)
         //nibオブジェクトをtableViewにidentifier"Cell"をつけて登録
         tableView.register(nib, forCellReuseIdentifier: "Cell")
@@ -52,6 +52,7 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
                     return
                 }
                 //取得したdocumentを元にPostDataを作成->postArray配列に格納
+                print(querySnapshot!)
                 self.postArray = querySnapshot!.documents.map { document in
                     print("DEBUG_print: document取得　\(document.documentID)")
                     let postData = PostData(document: document)
@@ -78,11 +79,16 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath) as! PostTableViewCell
-        //cellに画像を設定
+        //cellに画像を設定(setPostData()メソッドはPostTableVeiwCell.swiftで定義したもの)
         cell.setPostData(postArray[indexPath.row])
         
         //「いいね」ボタンのアクションを定義
         cell.likeButton.addTarget(self, action: #selector(handleButton(_:forEvent:)), for: .touchUpInside)
+        
+        //「コメント」ボタンのアクションを定義
+        cell.commentButton.addTarget(self, action: #selector(handleComment(_:forEvent:)), for: .touchUpInside)
+        
+        //セルを返す
         return cell
     }
     
@@ -91,26 +97,61 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
         print ("DEBUG_print: likeボタンがタップされました")
         
         //タップされたセルのインデックスを求める
+        //画面に触れた全てのタッチのうち最初のイベントをtouchに代入
         let touch = event.allTouches?.first
+        //そのイベントのtableView上の場所を所得（CGPoint）
         let point = touch!.location(in: self.tableView)
+        //得られたCGPointからtableView内のどのセルがタッチされたかを割り出し、そのセルのindexPathを得る
         let indexPath = tableView.indexPathForRow(at: point)
-        //タップされたインデックスのデータを配列から取り出す
+        //得られたindexPathから、タッチされたセルの投稿データを取得
         let postData = postArray[indexPath!.row]
         
         //likesを更新
+        //ログインしているユーサーのidがあれば
         if let myid = Auth.auth().currentUser?.uid {
             var updateValue: FieldValue
-            if postData.isLiked {
+            //自分がいいねを押していれば、likes配列からmyidを取り除くupdateValueを定義
+            if postData.isLiked == true {
                 updateValue = FieldValue.arrayRemove([myid])
             } else {
+            //自分がいいねを押していなければ、likes配列にmyidを追加するupdateValueを定義
                 updateValue = FieldValue.arrayUnion([myid])
             }
             
-            //likesに更新データを書き込む
+            //Firestore上のデータを書き込む場所を定義
             let postRef = Firestore.firestore().collection(Const.PostPath).document(postData.id)
+            //"likes"の更新データを書き込む
             postRef.updateData(["likes": updateValue])
         }
         
+    }
+    
+    @objc func handleComment(_ sender: UIButton, forEvent event: UIEvent) {
+        print ("DEBUG_print: commentボタンがタップされました")
+        
+        //タップされたセルのインデックスを求める
+        //画面に触れた全てのタッチのうち最初のイベントをtouchに代入
+        let touch = event.allTouches?.first
+        //そのイベントのtableView上の場所を所得（CGPoint）
+        let point = touch!.location(in: self.tableView)
+        //得られたCGPointからtableView内のどのセルがタッチされたかを割り出し、そのセルのindexPathを得る
+        let indexPath = tableView.indexPathForRow(at: point)
+        //得られたindexPathから、タッチされたセルの投稿データを取得
+        let postData = postArray[indexPath!.row]
+            print(indexPath!)
+            print(postData)
+        //---------------commentViewControllerを表示-------------
+        //Firestore上のタッチされた画像(セル)に該当するpostデータの場所を定義
+        let postRef = Firestore.firestore().collection(Const.PostPath).document(postData.id)
+            print (postRef)
+        //コメント画面("Comment")のviewControllerをcommentViewControllerへダウンキャストし、インスタンスを定義
+        let commentViewController = self.storyboard?.instantiateViewController(withIdentifier: "Comment") as! CommentViewController
+        //commentViewControllerへ取得したFirestoreのpost保存場所を送る
+        commentViewController.postRef = postRef
+        //投稿画面をmodal viewで表示
+        present(commentViewController, animated: true, completion: nil)
+
+
     }
 
 }

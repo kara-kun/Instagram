@@ -44,6 +44,7 @@ class SettingViewController: UIViewController {
                 //↑ここまでクロージャー
             }
         }
+        //キーボードを閉じる
         self.view.endEditing(true)
     }
         

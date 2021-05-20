@@ -20,12 +20,13 @@ class PostViewController: UIViewController {
     @IBAction func handlePostButton(_ sender: Any) {
         //画像をJPEGに変換(圧縮率0.75)
         let imageData = image.jpegData(compressionQuality: 0.75)
-        //画像と投稿データの保存先を定義
+        //投稿データの保存先を定義->Firestore Databeseへ
         let postRef = Firestore.firestore().collection(Const.PostPath).document()
+        //投稿画像の保存先を定義->Storageへ
         let imageRef = Storage.storage().reference().child(Const.ImagePath).child(postRef.documentID + ".jpg")
         
         //-------------------投稿処理------------------
-        //HUDで東京処理中の表示を開始
+        //HUDで投稿処理中の表示を開始
         SVProgressHUD.show()
         //ここから、Storageに画像をアップロード
         //StorageMetadataのインスタンスを定義
@@ -36,7 +37,7 @@ class PostViewController: UIViewController {
             if error != nil {
                 SVProgressHUD.showError(withStatus: "画像のアップロードに失敗しました")
                 print(error!)
-                //画像処理をキャンセルし、TabBar画面に戻る
+                //画像処理をキャンセルし、TabBar画面(もとのhome画面)に一気に戻る
                 UIApplication.shared.windows.first{ $0 .isKeyWindow }?.rootViewController?.dismiss(animated: true, completion: nil)
                 return
             }

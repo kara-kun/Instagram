@@ -21,22 +21,27 @@ class PostData: NSObject {
     var likes: [String] = []
     //自分が「いいね」したかどうかのフラグ
     var isLiked: Bool = false
+    //コメント
+    var comment:[String] = []
     
+    //FireStore　Databaseからとってきたデータの各パラメータ初期化
     init(document: QueryDocumentSnapshot) {
+        //ドキュメントidの定義
         self.id = document.documentID
-        
+        //Firestoreから取得したデータdocumentを辞書形式で格納
         let postDic = document.data()
-        
+        //nameはpostDic内の"name"キーに対応する文字列
         self.name = postDic["name"] as? String
-        
+        //captionはpostDic内の"caption"キーに対応する文字列
         self.caption = postDic["caption"] as? String
         //Timestampはfirebaseの日時形式
         let timestamp = postDic["date"] as? Timestamp
         self.date = timestamp?.dateValue()
-        
+        //likesはもし存在すれば、postDic内の"likes"キーに対応するid -> 文字列型へダウンキャスト
         if let likes = postDic["likes"] as? [String] {
             self.likes = likes
         }
+        
         
         if let myid = Auth.auth().currentUser?.uid {
             //likesの配列の中にmyidが含まれているかを確認（含まれていれば）

@@ -60,8 +60,9 @@ class ImageSelectViewController: UIViewController, UIImagePickerControllerDelega
             //CLImageEditorインスタンスを作成
             let editor = CLImageEditor(image: image)!
             editor.delegate = self
-            //modal View(fullScreen)で画像編集画面（先に定義したCLImageEditorインスタンス）を表示
+            //CLImageEditor編集画面の表示スタイル＝フルスクリーン
             editor.modalPresentationStyle = .fullScreen
+            //modal View(fullScreen)で画像編集画面（editor = CLImageEditorインスタンス）を表示
             picker.present(editor, animated: true, completion: nil)
         }
     }
@@ -77,6 +78,7 @@ class ImageSelectViewController: UIViewController, UIImagePickerControllerDelega
         let postViewController = self.storyboard?.instantiateViewController(withIdentifier: "Post") as! PostViewController
         //postViewControllerへ取得した画像を送る
         postViewController.image = image!
+        //投稿画面をmodal viewで表示
         editor.present(postViewController, animated: true, completion: nil)
     }
     
