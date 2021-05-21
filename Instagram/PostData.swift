@@ -22,7 +22,7 @@ class PostData: NSObject {
     //自分が「いいね」したかどうかのフラグ
     var isLiked: Bool = false
     //コメント
-    var comment:[String] = []
+    var comment:[String?] = []
     
     //FireStore　Databaseからとってきたデータの各パラメータ初期化
     init(document: QueryDocumentSnapshot) {

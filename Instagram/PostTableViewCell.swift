@@ -24,7 +24,6 @@ class PostTableViewCell: UITableViewCell {
 
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
-
         // Configure the view for the selected state
     }
     
@@ -35,10 +34,12 @@ class PostTableViewCell: UITableViewCell {
         postImageView.sd_imageIndicator = SDWebImageActivityIndicator.gray
         //Storage上の画像の保存場所を取得
         let imageRef = Storage.storage().reference().child(Const.ImagePath).child(postData.id + ".jpg")
-        //print(imageRef)
+        print(postData.id)
         //imageViewの表示画像に、Storageから取得した画像を設定
         postImageView.sd_setImage(with: imageRef)
         
+        print(postData.name!)
+        print(postData.caption!)
         //キャプションの表示「名前：キャプション」
         self.captionLabel.text = "\(postData.name!):\(postData.caption!)"
         

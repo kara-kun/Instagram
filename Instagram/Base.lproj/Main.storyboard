@@ -332,10 +332,16 @@
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="aLs-8n-aBD">
                                 <rect key="frame" x="57" y="509" width="300" height="40"/>
                                 <state key="normal" title="投稿" backgroundImage="btn"/>
+                                <connections>
+                                    <action selector="postComment:" destination="Enn-jm-BaX" eventType="touchUpInside" id="0bM-aI-KB5"/>
+                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="GJ3-Xz-A2K">
                                 <rect key="frame" x="57" y="559" width="300" height="40"/>
                                 <state key="normal" title="キャンセル" backgroundImage="btn"/>
+                                <connections>
+                                    <action selector="handleCancelButton:" destination="Enn-jm-BaX" eventType="touchUpInside" id="SR7-8y-JbM"/>
+                                </connections>
                             </button>
                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="gww-YQ-JRP">
                                 <rect key="frame" x="57" y="364" width="300" height="125"/>
@@ -376,6 +382,10 @@
                             <constraint firstItem="aLs-8n-aBD" firstAttribute="centerX" secondItem="VNH-cl-p8Y" secondAttribute="centerX" id="ySz-lO-wS5"/>
                         </constraints>
                     </view>
+                    <connections>
+                        <outlet property="inputCommentTextView" destination="gww-YQ-JRP" id="cMk-mE-Q41"/>
+                        <outlet property="postImageView" destination="UoN-fR-u3K" id="FjX-mI-wuT"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="y7h-rn-LQC" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>

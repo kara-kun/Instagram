@@ -42,15 +42,16 @@ class PostViewController: UIViewController {
                 return
             }
             //画像をアップロードできたら、FireStoreに投稿データを保存
-            //現在とグインしているユーサー名を取得
+            //現在ログインしているユーサー名を取得
             let name = Auth.auth().currentUser?.displayName
+            //辞書postDicに、Firestoreに書き込むデータを整理（名前／キャプション／投稿日時）
             let postDic = [
                 "name": name!,
                 "caption": self.textField.text!,
                 "date": FieldValue.serverTimestamp(),
             ] as [String: Any]
+            //Firestoreの保存場所postRefへ、postDicの内容を書込
             postRef.setData(postDic)
-            
             //HUDで投稿完了を表示
             SVProgressHUD.showSuccess(withStatus: "投稿しました")
             //元の画面(TabBar)に戻る
@@ -69,7 +70,4 @@ class PostViewController: UIViewController {
         //受け取った画像をimageViewに表示する
         imageView.image = image
     }
-
-    
-
 }

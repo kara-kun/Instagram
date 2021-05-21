@@ -56,6 +56,7 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
                 self.postArray = querySnapshot!.documents.map { document in
                     print("DEBUG_print: document取得　\(document.documentID)")
                     let postData = PostData(document: document)
+                    //print(postData)
                     return postData
                 }
                 //tableViewの表示を更新
@@ -138,8 +139,8 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
         let indexPath = tableView.indexPathForRow(at: point)
         //得られたindexPathから、タッチされたセルの投稿データを取得
         let postData = postArray[indexPath!.row]
-            print(indexPath!)
-            print(postData)
+//            print(indexPath!)
+//            print(postData)
         //---------------commentViewControllerを表示-------------
         //Firestore上のタッチされた画像(セル)に該当するpostデータの場所を定義
         let postRef = Firestore.firestore().collection(Const.PostPath).document(postData.id)
@@ -148,10 +149,9 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
         let commentViewController = self.storyboard?.instantiateViewController(withIdentifier: "Comment") as! CommentViewController
         //commentViewControllerへ取得したFirestoreのpost保存場所を送る
         commentViewController.postRef = postRef
+        //commentViewController.postData = postArray[indexPath!.row]
         //投稿画面をmodal viewで表示
         present(commentViewController, animated: true, completion: nil)
-
-
     }
 
 }
