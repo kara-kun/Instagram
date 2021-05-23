@@ -9,11 +9,11 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
-        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="524" id="KGk-i7-Jjw" customClass="PostTableViewCell" customModule="Instagram" customModuleProvider="target">
-            <rect key="frame" x="0.0" y="0.0" width="360" height="524"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="558" id="KGk-i7-Jjw" customClass="PostTableViewCell" customModule="Instagram" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="360" height="558"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
-                <rect key="frame" x="0.0" y="0.0" width="360" height="524"/>
+                <rect key="frame" x="0.0" y="0.0" width="360" height="558"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="h1q-1l-xK8">
@@ -46,7 +46,10 @@
                         <nil key="highlightedColor"/>
                     </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1EP-Ff-dL8">
-                        <rect key="frame" x="30" y="401" width="300" height="102"/>
+                        <rect key="frame" x="30" y="401" width="300" height="50"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="50" id="hpC-Ws-eDH"/>
+                        </constraints>
                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
@@ -59,20 +62,29 @@
                         </constraints>
                         <state key="normal" title="Button" image="comment"/>
                     </button>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ex1-38-saN">
+                        <rect key="frame" x="30" y="461" width="300" height="87"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                        <nil key="textColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
                 </subviews>
                 <constraints>
                     <constraint firstItem="40D-OQ-MB7" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" constant="10" id="0KM-rL-fFx"/>
-                    <constraint firstAttribute="bottomMargin" secondItem="1EP-Ff-dL8" secondAttribute="bottom" constant="10" id="5HP-ol-PrN"/>
+                    <constraint firstAttribute="trailingMargin" secondItem="Ex1-38-saN" secondAttribute="trailing" constant="10" id="1zV-vO-aBb"/>
                     <constraint firstAttribute="trailingMargin" secondItem="HMD-Jt-mBC" secondAttribute="trailing" constant="10" id="Ax3-7L-9Ax"/>
                     <constraint firstItem="HMD-Jt-mBC" firstAttribute="centerY" secondItem="40D-OQ-MB7" secondAttribute="centerY" id="Fwx-Qz-Pjj"/>
                     <constraint firstItem="uLa-vx-hGc" firstAttribute="centerY" secondItem="40D-OQ-MB7" secondAttribute="centerY" id="N9w-vz-LYO"/>
+                    <constraint firstItem="Ex1-38-saN" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" constant="10" id="NA5-Nk-dON"/>
                     <constraint firstItem="40D-OQ-MB7" firstAttribute="top" secondItem="h1q-1l-xK8" secondAttribute="bottom" constant="10" id="TlV-q3-zlh"/>
                     <constraint firstAttribute="trailingMargin" secondItem="1EP-Ff-dL8" secondAttribute="trailing" constant="10" id="V6V-b5-sMR"/>
                     <constraint firstItem="uLa-vx-hGc" firstAttribute="leading" secondItem="40D-OQ-MB7" secondAttribute="trailing" constant="10" id="YUg-6g-8u1"/>
                     <constraint firstItem="Tqf-BW-SLC" firstAttribute="leading" secondItem="uLa-vx-hGc" secondAttribute="trailing" constant="10" id="c7f-aB-bMM"/>
                     <constraint firstAttribute="trailingMargin" secondItem="h1q-1l-xK8" secondAttribute="trailing" id="cER-uU-qBm"/>
+                    <constraint firstItem="Ex1-38-saN" firstAttribute="top" secondItem="1EP-Ff-dL8" secondAttribute="bottom" constant="10" id="e3g-pV-aZ4"/>
                     <constraint firstItem="HMD-Jt-mBC" firstAttribute="leading" secondItem="Tqf-BW-SLC" secondAttribute="trailing" constant="10" id="hxf-fj-l23"/>
                     <constraint firstItem="Tqf-BW-SLC" firstAttribute="centerY" secondItem="40D-OQ-MB7" secondAttribute="centerY" id="kHK-ui-TFP"/>
+                    <constraint firstAttribute="bottom" secondItem="Ex1-38-saN" secondAttribute="bottom" constant="10" id="krJ-IF-39L"/>
                     <constraint firstItem="h1q-1l-xK8" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" id="pud-xc-nyF"/>
                     <constraint firstItem="1EP-Ff-dL8" firstAttribute="top" secondItem="40D-OQ-MB7" secondAttribute="bottom" constant="10" id="rBz-Ub-GAI"/>
                     <constraint firstItem="1EP-Ff-dL8" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" constant="10" id="sgu-qP-THZ"/>
@@ -83,12 +95,13 @@
             <connections>
                 <outlet property="captionLabel" destination="1EP-Ff-dL8" id="20q-Rx-x5t"/>
                 <outlet property="commentButton" destination="Tqf-BW-SLC" id="Hqg-RG-hea"/>
+                <outlet property="commentLabel" destination="Ex1-38-saN" id="vaJ-cj-qP1"/>
                 <outlet property="dateLabel" destination="HMD-Jt-mBC" id="PIj-5h-vJF"/>
                 <outlet property="likeButton" destination="40D-OQ-MB7" id="7h8-rA-44d"/>
                 <outlet property="likeLabel" destination="uLa-vx-hGc" id="ARW-ao-Sov"/>
                 <outlet property="postImageView" destination="h1q-1l-xK8" id="Y8B-mj-Xoo"/>
             </connections>
-            <point key="canvasLocation" x="166.66666666666669" y="258.48214285714283"/>
+            <point key="canvasLocation" x="-187" y="310"/>
         </tableViewCell>
     </objects>
     <resources>

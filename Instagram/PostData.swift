@@ -22,7 +22,13 @@ class PostData: NSObject {
     //自分が「いいね」したかどうかのフラグ
     var isLiked: Bool = false
     //コメント
-    var comment:[String?] = []
+    var commentField:[[String: String]] = [[:]]
+    //コメントした人の名前
+    //var commentName: String
+    //各コメントの中身
+    //var commentText: String
+    //コメント表示用の辞書
+    var commentDic: [String] = []
     
     //FireStore　Databaseからとってきたデータの各パラメータ初期化
     init(document: QueryDocumentSnapshot) {
@@ -37,11 +43,11 @@ class PostData: NSObject {
         //Timestampはfirebaseの日時形式
         let timestamp = postDic["date"] as? Timestamp
         self.date = timestamp?.dateValue()
+
         //likesはもし存在すれば、postDic内の"likes"キーに対応するid -> 文字列型へダウンキャスト
         if let likes = postDic["likes"] as? [String] {
             self.likes = likes
         }
-        
         
         if let myid = Auth.auth().currentUser?.uid {
             //likesの配列の中にmyidが含まれているかを確認（含まれていれば）
@@ -49,6 +55,19 @@ class PostData: NSObject {
                 //「いいね」を押していると判定
                 self.isLiked = true
             }
+        }
+        //--------------コメントの取得---------------
+        //print("postDic_:  \(postDic["comment"])")
+        //コメントはもし存在すれば、postDis内の"comment"キー内の”commentName””commentText”->文字列型にダウンキャスト
+        if let commentField = postDic["comment"] as? [[String: String]] {
+            //print("commentField: \(commentField)")
+            //Firestore内のコメントを、表示用の文字列に変換して辞書commentDicを初期化
+            for comment in commentField {
+                let commentName: String = comment["commentName"]!
+                let commentText: String  = comment["commentText"]!
+                self.commentDic.append("\(commentName): \(commentText)")
+            }
+            print("dic_comment: \(commentDic)")
         }
     }
 }

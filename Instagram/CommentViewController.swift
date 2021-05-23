@@ -7,7 +7,7 @@
 
 import UIKit
 import Firebase
-import SVProgressHUD
+//import SVProgressHUD
 
 class CommentViewController: UIViewController {
     //var image: UIImage!
@@ -22,6 +22,17 @@ class CommentViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
+        
+        // コメント入力欄inputCommentTextView:枠の色
+        inputCommentTextView.layer.borderColor = UIColor.gray.cgColor
+        
+        // コメント入力欄inputCommentTextView: 枠の幅
+        inputCommentTextView.layer.borderWidth = 1.0
+        
+        // コメント入力欄inputCommentTextView: 枠を角丸にする
+        inputCommentTextView.layer.cornerRadius = 10.0
+        inputCommentTextView.layer.masksToBounds = true
+        
         //-------受け取った画像をimageViewに表示-------
         //homeViewControllerから受け取ったimageRefを元に、Storage内から投稿先の画像データをゲット
         let imageRef = Storage.storage().reference().child(Const.ImagePath).child(postRef.documentID + ".jpg")
@@ -33,17 +44,24 @@ class CommentViewController: UIViewController {
         //HUDで投稿処理中の表示を開始
         //SVProgressHUD.show()
         //コメント欄に入力されたコメントをゲットする。
-        let comment = inputCommentTextView.text
+        let commentText = inputCommentTextView.text
         //コメントを書いた人＝現在ログインしているユーザーのdisplayNameをゲット
-        let name = Auth.auth().currentUser?.displayName
+        let commentName = Auth.auth().currentUser?.displayName
         //辞書postDicに、Firestoreに書き込むデータを整理（名前／コメント／投稿日時）
         let postDic = [
-            "name": name!,
-            "comment": comment!,
-            "date": FieldValue.serverTimestamp(),
+            "commentName": commentName!,
+            "commentText": commentText!,
+            //"commentDate": FieldValue.serverTimestamp()
         ] as [String: Any]
-        //postDicをFirestoreに書き込む
-        postRef.setData(postDic)
+            print(postDic)
+        
+        //コメントの更新データを収める変数updateFieldを定義する
+        var updateField: FieldValue
+        //更新データをまとめた辞書(配列)postDicを、setData()で追加できるデータに変換
+        updateField = FieldValue.arrayUnion([postDic])
+        //Firestore上に配列commentに、updateFieldを書き込む（すでに配列「comment」がある場合は、merge追記する）
+        postRef.setData(["comment": updateField], merge: true)
+        
         //元の画面(HomeViewController)へ戻る
         self.dismiss(animated: true, completion: nil)
     }

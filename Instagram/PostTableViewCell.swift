@@ -16,6 +16,7 @@ class PostTableViewCell: UITableViewCell {
     @IBOutlet weak var dateLabel: UILabel!
     @IBOutlet weak var captionLabel: UILabel!
     @IBOutlet weak var commentButton: UIButton!
+    @IBOutlet weak var commentLabel: UILabel!
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -34,14 +35,14 @@ class PostTableViewCell: UITableViewCell {
         postImageView.sd_imageIndicator = SDWebImageActivityIndicator.gray
         //Storage上の画像の保存場所を取得
         let imageRef = Storage.storage().reference().child(Const.ImagePath).child(postData.id + ".jpg")
-        print(postData.id)
+            print(postData.id)
         //imageViewの表示画像に、Storageから取得した画像を設定
         postImageView.sd_setImage(with: imageRef)
         
-        print(postData.name!)
-        print(postData.caption!)
         //キャプションの表示「名前：キャプション」
         self.captionLabel.text = "\(postData.name!):\(postData.caption!)"
+        //print(postData.name!)
+        //print(postData.caption!)
         
         //日時の表示
         self.dateLabel.text = ""
@@ -74,7 +75,22 @@ class PostTableViewCell: UITableViewCell {
             let buttonImage = UIImage(named: "like_none")
             self.likeButton.setImage(buttonImage, for: .normal)
         }
-        //
+        
+        //---------コメントの表示---------
+        //最初に、コメント欄を一度カラ空にする。
+        commentLabel.text! = ""
+        //コメントがあれば-> commentDicが存在すれば
+        let commentNumber:Int = postData.commentDic.count
+            print("commentNumber: \(commentNumber)")
+            print("commentDic: \(postData.commentDic)")
+//        //コメントを取り出して
+        if commentNumber != 0 {
+            for comment in postData.commentDic {
+//                //commentLabelに表示
+                commentLabel.text! += comment + "\n"
+            }
+        }
+            print(commentLabel.text!)
     
     }
     
