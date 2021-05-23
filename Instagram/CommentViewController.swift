@@ -7,7 +7,7 @@
 
 import UIKit
 import Firebase
-//import SVProgressHUD
+import SVProgressHUD
 
 class CommentViewController: UIViewController {
     //var image: UIImage!
@@ -42,7 +42,7 @@ class CommentViewController: UIViewController {
     //コメント「投稿」ボタンの実装
     @IBAction func postComment(_ sender: Any) {
         //HUDで投稿処理中の表示を開始
-        //SVProgressHUD.show()
+        SVProgressHUD.show()
         //コメント欄に入力されたコメントをゲットする。
         let commentText = inputCommentTextView.text
         //コメントを書いた人＝現在ログインしているユーザーのdisplayNameをゲット
@@ -60,10 +60,21 @@ class CommentViewController: UIViewController {
         //更新データをまとめた辞書(配列)postDicを、setData()で追加できるデータに変換
         updateField = FieldValue.arrayUnion([postDic])
         //Firestore上に配列commentに、updateFieldを書き込む（すでに配列「comment」がある場合は、merge追記する）
-        postRef.setData(["comment": updateField], merge: true)
-        
-        //元の画面(HomeViewController)へ戻る
-        self.dismiss(animated: true, completion: nil)
+        postRef.setData(["comment": updateField], merge: true) {(error) in
+            //ここからクロージャー。投稿時にエラーがあれば
+            if error != nil {
+                //HUDでエラー表示
+                SVProgressHUD.showError(withStatus: "投稿にに失敗しました")
+                print("DEBUD_print: \(error!)")
+                //元の画面(HomeViewController)へ戻る
+                self.dismiss(animated: true, completion: nil)
+                return
+            }
+            //HUDで投稿完了を表示
+            SVProgressHUD.showSuccess(withStatus: "コメントを投稿しました")
+            //元の画面(HomeViewController)へ戻る
+            self.dismiss(animated: true, completion: nil)
+        }
     }
     
     //「キャンセル」ボタンの実装
